@@ -1,7 +1,12 @@
 import { FaCrown } from "react-icons/fa";
 
-function Ranking(){
+function Ranking() {
   return (
-    <FaCrown />
-  )
+    // ランキングのアイコンとランキングボタンを表示
+    <button className="ranking-button">
+      <FaCrown />
+      <p>ランキング</p>
+    </button>
+  );
 }
+export default Ranking;
