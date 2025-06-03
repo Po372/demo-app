@@ -5,6 +5,7 @@ import Link from "next/link";
 export default function Ranking() {
   return (
     <div className="flex flex-col items-center gap-12 text-xl">
+      {/* ランキングボタン */}
       <div className="flex items-center px-8 py-4 justify-between w-full bg-cyan-600 rounded-b-3xl font-bold text-white">
         <Link href="/">
           <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="#fff">
@@ -13,6 +14,7 @@ export default function Ranking() {
         </Link>
         <div>ランキング</div>
       </div>
+      {/* レア失敗ランキング */}
       <div className="w-9/10 border-2 border-lime-600 rounded-2xl px-4 py-12">
         <div className="text-center font-bold text-2xl">レア失敗ランキング</div>
         <div className="mt-12">1位</div>
@@ -22,6 +24,7 @@ export default function Ranking() {
         </div>
         <div className="mt-12">全社員に退職通知を送付してしまった。</div>
       </div>
+      {/* 普遍失敗ランキング */}
       <div className="w-9/10 border-2 border-cyan-600 rounded-2xl px-4 py-12">
         <div className="text-center font-bold text-2xl">普遍失敗ランキング</div>
         <div className="mt-12">1位</div>
