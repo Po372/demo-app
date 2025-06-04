@@ -28,16 +28,17 @@ export const Result: React.FC<ResultProps> = ({ grade, score, ranking }) => {
 
         {/* 📄 メインカード */}
         <div className="mt-4">
-            <div className=" border-3 border-cyan-400 rounded-xl ">
-                <p className="mt-4 text-gray-700 text-sm mb-2">あなたの結果は…</p>
-                    <div className="text-6xl font-bold  w-24 h-24 flex items-center justify-center mx-auto my-4 text-black">
+            <div className=" border-2 border-cyan-400 rounded-md px-4 py-2 inline-block">
+                <p className="mt-4 text-gray-700 text-sm text-center mb-2">あなたの結果は…</p>
+                    <div className="text-6xl font-bold flex items-center justify-center mx-auto my-4 text-black">
                         {grade}
                     </div>
             </div>
+            {/*やらかし度合いを点数表示*/}
             <p className="text-lg text-black mt-6">
                 やらかし度：<span className="font-semibold text-4xl">{score}点</span>
             </p>
-                
+                {/*自分周辺のランキング表示*/ }
                 <div className="bg-lime-200 rounded-md mt-6 py-2 px-4 space-y-1 text-left text-black text-sm font-bold">
                 {ranking.map((entry) => (
                     <div key={entry.id}>
