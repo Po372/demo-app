@@ -8,15 +8,8 @@ const testRanking = [
 
 export default function Home() {
   return (
-    <>
-      <div className="text-3xl">
-        <p>
-          これは最初のページです。
-        </p>
-      </div>
-      <div className="bg-white">
-        <Result grade="SS" score={127} ranking={testRanking}/>
-      </div>
-    </>
+    <div className="bg-white">
+      <Result grade="SS" score={127} ranking={testRanking}/>
+    </div>
   );
 }

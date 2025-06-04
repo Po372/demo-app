@@ -1,3 +1,6 @@
+"use client";
+
+import Link from "next/link";
 import React from 'react';
 
 type RankingEntry = {
@@ -19,12 +22,14 @@ export const Result: React.FC<ResultProps> = ({ grade, score, ranking }) => {
     <div className="bg-cyan-600 min-h-screen flex flex-col items-center justify-center relative font-sans">
       <div className="bg-white rounded-2xl p-6 shadow-xl w-[350px] text-center">
         {/* 🏠 ホームボタン */}
-        <button className="bg-cyan-700 rounded-full w-10 h-10 flex items-center justify-center shadow-md text-white text-xl">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg>
-        </button>
+        <Link href="/">
+          <button className="bg-cyan-700 hover:bg-cyan-500 transition-colors duration-200 rounded-full w-10 h-10 flex items-center justify-center shadow-md text-white text-xl">
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg>
+          </button>
+        </Link>
 
         {/* 📄 メインカード */}
-        <div className="">
+        <div className="mt-4">
             <div className="border-2 border-cyan-400 rounded-xl">
                 <p className="mt-4 text-gray-700 text-sm mb-2">あなたの結果は…</p>
                     <div className="text-6xl font-bold  w-24 h-24 flex items-center justify-center mx-auto my-4 text-black">
