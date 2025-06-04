@@ -1,12 +1,18 @@
+"use client";
+
+import Link from "next/link";
 import { FaCrown } from "react-icons/fa";
+{
+  /*リンク先のここあんまり自信ないので確認お願いします*/
+}
 
 function Ranking() {
   return (
-    // ランキングのアイコンとランキングボタンを表示
-    <button className="ranking-button">
+    <Link href="/ranking" className="ranking-button">
       <FaCrown />
       <p>ランキング</p>
-    </button>
+    </Link>
   );
 }
+
 export default Ranking;
