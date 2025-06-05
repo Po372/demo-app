@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Ranking() {
   return (
-    <div className="flex flex-col items-center gap-8 text-xl mb-8">
+    <div className="flex flex-col items-center gap-8 text-xl mb-8 bg-white">
       {/* ランキングボタン */}
       <div className="flex items-center px-8 py-2 justify-between w-full bg-cyan-600 rounded-b-3xl font-bold text-white">
         <Link href="/" className="p-2 rounded-full transition hover:bg-cyan-700">
