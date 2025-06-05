@@ -1,5 +1,5 @@
 import "../Home/CSS/Home.css";
-import TextInput from "./TextInput";
+import TextInput from "./Textinput";
 import Ranking from "./Ranking";
 import Headline from "./Headline";
 

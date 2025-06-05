@@ -2,10 +2,11 @@ import Link from "next/link";
 import React from 'react';
 
 type RankingEntry = {
-  id: number;
+  id: string;
   userId: number;
   userName: string;
   score: number;
+  comment:string
   rank: number;
 };
 
