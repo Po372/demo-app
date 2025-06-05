@@ -1,8 +1,28 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function Ranking() {
+  const [rankingResults, setRankingResults] = useState<{
+    top: { score: number; userName: string; failureText: string };
+    bottom: { score: number; userName: string; failureText: string };
+  }>();
+  useEffect(() => {
+    fetch("/api/ranking")
+      .then(async (rawResponse) => {
+        if (!rawResponse.ok) {
+          throw new Error("ネットワークエラー: " + rawResponse.statusText);
+        }
+        const response = await rawResponse.json();
+        setRankingResults(response.rankingResults);
+        return;
+      })
+      .catch((error) => {
+        console.error("ランキングデータの取得に失敗しました", error);
+      });
+  }, []);
+
   return (
     <div className="flex flex-col items-center gap-8 text-xl mb-8 bg-white">
       {/* ランキングボタン */}
@@ -19,20 +39,20 @@ export default function Ranking() {
         <div className="text-center font-bold text-2xl">レア失敗ランキング</div>
         <div className="mt-12">1位</div>
         <div className="flex items-center justify-between">
-          <div>ハチマキ</div>
+          <div>{rankingResults?.top.userName}</div>
           <div>SSS</div>
         </div>
-        <div className="mt-12">全社員に退職通知を送付してしまった。</div>
+        <div className="mt-12">{rankingResults?.top.failureText}</div>
       </div>
       {/* 普遍失敗ランキング */}
       <div className="w-9/10 border-2 border-cyan-600 rounded-2xl px-4 py-12 md:w-3/10">
         <div className="text-center font-bold text-2xl">普遍失敗ランキング</div>
         <div className="mt-12">1位</div>
         <div className="flex items-center justify-between">
-          <div>羽根つき餃子</div>
+          <div>{rankingResults?.bottom.userName}</div>
           <div>SSS</div>
         </div>
-        <div className="mt-12">電車に乗り遅れて5分ほど遅刻してしまった。</div>
+        <div className="mt-12">{rankingResults?.bottom.failureText}</div>
       </div>
     </div>
   );
