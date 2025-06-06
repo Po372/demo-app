@@ -1,5 +1,6 @@
 "use client";
 
+import { supabase } from "@/utils/supabase";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -8,19 +9,52 @@ export default function Ranking() {
     top: { score: number; userName: string; failureText: string };
     bottom: { score: number; userName: string; failureText: string };
   }>();
+
   useEffect(() => {
-    fetch("/api/ranking")
-      .then(async (rawResponse) => {
-        if (!rawResponse.ok) {
-          throw new Error("ネットワークエラー: " + rawResponse.statusText);
+    const fetchRankingData = async () => {
+      try {
+        // 最高スコア（1位）を取得
+        const { data: topData, error: topError } = await supabase
+          .from("results")
+          .select("score, user_name, failure_text")
+          .order("score", { ascending: false })
+          .limit(1);
+
+        // 最低スコア（最下位）を取得
+        const { data: bottomData, error: bottomError } = await supabase
+          .from("results")
+          .select("score, user_name, failure_text")
+          .order("score", { ascending: true })
+          .limit(1);
+
+        if (topError || bottomError) {
+          console.error("データの読み込みに失敗しました: ", topError , bottomError);
+          return;
         }
-        const response = await rawResponse.json();
-        setRankingResults(response.rankingResults);
-        return;
-      })
-      .catch((error) => {
-        console.error("ランキングデータの取得に失敗しました", error);
-      });
+        if (!topData || !bottomData || topData.length === 0 || bottomData.length === 0) {
+          console.error("ランキングデータが見つかりません。");
+          return;
+        }
+
+        // ランキング結果を設定
+        setRankingResults({
+          top: {
+            score: topData[0].score,
+            userName: topData[0].user_name,
+            failureText: topData[0].failure_text,
+          },
+          bottom: {
+            score: bottomData[0].score,
+            userName: bottomData[0].user_name,
+            failureText: bottomData[0].failure_text,
+          },
+        });
+      } catch (error) {
+        console.error("ランキングデータの取得中にエラー: ", error);
+      }
+    };
+
+    fetchRankingData();
   }, []);
 
   return (
