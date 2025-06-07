@@ -7,7 +7,7 @@ function Headline() {
       style={{
         display: "inline-block",
         padding: "0.25rem 0.5rem",
-        border: "1px solid rgb(61, 248, 14)",
+        border: "2px solid #d9f99d",
         borderRadius: "0.5rem",
       }}
     >
