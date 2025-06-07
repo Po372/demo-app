@@ -166,7 +166,7 @@ export default function Ranking() {
 
         {/* 普遍失敗ランキング */}
         <div className="">
-          <div className="border-2 border-cyan-600 rounded-2xl px-6 py-8 bg-cyan-600">
+          <div className="border-2 border-cyan-900 rounded-2xl px-6 py-8 bg-cyan-600">
             <div className="text-center font-bold text-2xl text-cyan-100 mb-6 flex items-center justify-center gap-3">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -179,7 +179,7 @@ export default function Ranking() {
               </svg>
               普遍失敗ランキング
             </div>
-            <div className="bg-white px-8 py-8 rounded-2xl border-2 border-cyan-600 mt-6 shadow-lg">
+            <div className="bg-white px-8 py-8 rounded-2xl border-2 border-cyan-900 mt-6 shadow-lg">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
                   <div className="flex justify-center items-center gap-2 bg-gradient-to-r from-blue-400 to-cyan-400 text-white px-3 py-1 rounded-full text-lg font-bold shadow-md">
