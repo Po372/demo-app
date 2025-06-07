@@ -3,7 +3,6 @@ import React from 'react';
 
 type RankingEntry = {
   id: string;
-  userId: number;
   userName: string;
   score: number;
   comment:string
@@ -29,7 +28,7 @@ export const Result: React.FC<ResultProps> = ({ grade, score, ranking }) => {
 
         {/* 📄 メインカード */}
         <div className="mt-4">
-            <div className=" border-2 border-cyan-400 rounded-md px-4 py-2 inline-block">
+            <div className=" border-2 border-cyan-400 rounded-xl px-4 py-2 inline-block">
                 <p className="mt-4 text-gray-700 text-sm text-center mb-2">あなたの結果は…</p>
                     <div className="text-6xl font-bold flex items-center justify-center mx-auto my-4 text-black">
                         {grade}
