@@ -99,11 +99,12 @@ export default function Ranking() {
         <h1 className="text-3xl font-bold text-gray-800 mb-2">失敗ランキング</h1>
         <p className="text-gray-600 text-lg">みんなの失敗から学ぼう</p>
       </div>
+
       {/* レア失敗ランキング */}
-      <div className="w-9/10 md:w-4/10">
-        <div className="border-2 border-lime-600 rounded-2xl px-6 py-8 bg-lime-100">
-          <div className="text-center font-bold text-2xl text-lime-800 mb-6 flex items-center justify-center gap-3">
-            <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="#65a30d">
+      <div className="w-9/10 md:w-6/10">
+        <div className="border-2 border-lime-600 rounded-2xl px-6 py-8 bg-lime-200">
+          <div className="text-center font-bold text-2xl text-lime-900 mb-6 flex items-center justify-center gap-3">
+            <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="#35530e">
               <path d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
             </svg>
             レア失敗ランキング
@@ -148,7 +149,7 @@ export default function Ranking() {
           <div className="mt-6 flex justify-end">
             <Link
               href="/ranking/rare-failures"
-              className="text-lime-600 font-semibold py-2 px-4 rounded-lg hover:bg-black/10 transition"
+              className="text-lime-900 font-semibold py-2 px-4 rounded-lg hover:bg-black/10 transition"
             >
               さらに見る →
             </Link>
@@ -157,10 +158,10 @@ export default function Ranking() {
       </div>
 
       {/* 普遍失敗ランキング */}
-      <div className="w-9/10 md:w-4/10">
-        <div className="border-2 border-cyan-600 rounded-2xl px-6 py-8 bg-cyan-100">
-          <div className="text-center font-bold text-2xl text-cyan-800 mb-6 flex items-center justify-center gap-3">
-            <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="#0891b2">
+      <div className="w-9/10 md:w-6/10">
+        <div className="border-2 border-cyan-600 rounded-2xl px-6 py-8 bg-cyan-600">
+          <div className="text-center font-bold text-2xl text-cyan-100 mb-6 flex items-center justify-center gap-3">
+            <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="#cefafe">
               <path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm-40-82v-78q-33 0-56.5-23.5T360-320v-40L168-552q-3 18-5.5 36t-2.5 36q0 121 79.5 212T440-162Zm276-102q20-22 36-47.5t26.5-53q10.5-27.5 16-56.5t5.5-59q0-98-54.5-179T616-776h-16q-33 0-56.5 23.5T520-696v56q0 50-35 85t-85 35h-40v40q0 33-23.5 56.5T280-400h-3l126 126q27 27 42.5 62.5T461-145q0 17-2 33.5t-7 32.5l66-66Z" />
             </svg>
             普遍失敗ランキング
@@ -205,7 +206,7 @@ export default function Ranking() {
           <div className="mt-6 flex justify-end">
             <Link
               href="/ranking/common-failures"
-              className="text-cyan-600 font-semibold py-2 px-4 rounded-lg hover:bg-black/10 transition"
+              className="text-cyan-100 font-semibold py-2 px-4 rounded-lg hover:bg-black/10 transition"
             >
               さらに見る →
             </Link>
