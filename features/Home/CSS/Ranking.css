@@ -1,8 +1,20 @@
+.ranking-container {
+  align-self: flex-end; /* 親の中で右寄せ */
+} /*特定の要素の中で右寄せするプロパティ*/
+
 .ranking-button {
-  display: flex;
+  display: inline-flex;
   justify-content: flex-end;
   padding: 0.5rem 1rem;
-  border: 1px solid white;
-  border-radius: 0.5rem;
-  color: white;
+  border: 1px solid #dcdcdc;
+  border-radius: 1rem;
+  color: #ffffff;
+  background-color: #dcdcdc;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* 通常時の影 */
+  transition: all 0.1s ease-in-out; /* スムーズなアニメーション */
+}
+.ranking-button:active {
+  transform: translateY(2px); /* 下に2px沈む */
+  box-shadow: none; /* 影を消して沈んだ感じに */
+  background-color: #55bb55; /* 少し色も変えて効果を強調 */
 }
