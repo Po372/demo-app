@@ -1,0 +1,6 @@
+.headline {
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  /*外側の線についての編集はスパンタグで書きました*/
+}
