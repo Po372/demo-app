@@ -13,14 +13,14 @@ export default function Ranking() {
   useEffect(() => {
     const fetchRankingData = async () => {
       try {
-        // 最高スコア（1位）を取得
+        // 最高スコア（1位）をSupabaseから取得
         const { data: topData, error: topError } = await supabase
           .from("results")
           .select("score, user_name, failure_text")
           .order("score", { ascending: false })
           .limit(1);
 
-        // 最低スコア（最下位）を取得
+        // 最低スコア（最下位）をSupabaseから取得
         const { data: bottomData, error: bottomError } = await supabase
           .from("results")
           .select("score, user_name, failure_text")
