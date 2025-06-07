@@ -1,6 +1,6 @@
 "use client";
 
-import { scoreToRank } from "@/logics/scoreToRank";
+import { scoreToGrade } from "@/logics/scoreToRank";
 import { supabase } from "@/utils/supabase";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -142,7 +142,7 @@ export default function Ranking() {
                   <div className="font-semibold text-gray-800 text-xl">{rankingResults.top.userName || "匿名"}</div>
                 </div>
                 <div className="text-4xl font-bold text-lime-600 flex items-center gap-2">
-                  {scoreToRank(rankingResults.top.score)}
+                  {scoreToGrade(rankingResults.top.score)}
                   <span className="text-sm text-gray-500 font-normal">ランク</span>
                 </div>
               </div>
@@ -205,7 +205,7 @@ export default function Ranking() {
                   <div className="font-semibold text-gray-800 text-xl">{rankingResults.bottom.userName || "匿名"}</div>
                 </div>
                 <div className="text-4xl font-bold text-cyan-600 flex items-center gap-2">
-                  {scoreToRank(rankingResults.bottom.score)}
+                  {scoreToGrade(rankingResults.bottom.score)}
                   <span className="text-sm text-gray-500 font-normal">ランク</span>
                 </div>
               </div>

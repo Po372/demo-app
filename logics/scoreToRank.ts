@@ -1,4 +1,13 @@
-export function scoreToRank(score: number): string {
+/**
+ * 数値スコアを対応するランク文字列に変換します。
+ *
+ * スコア（-100から100の範囲）をランク（SSS, SS, S, A, ...）に変換します。
+ *
+ * @param score - 変換するスコア。-100から100までの値である必要があります。
+ * @returns 指定されたスコアに対応するランク文字列。
+ * @throws {Error} スコアが-100から100の範囲外の場合にスローされます。
+ */
+export function scoreToGrade(score: number): string {
   if (score > 100 || score < -100) {
     throw new Error("スコアは-100から100の範囲でなければなりません。");
   }
@@ -27,7 +36,7 @@ export function scoreToRank(score: number): string {
     return "-A";
   } else if (score >= -95) {
     return "-S";
-  } else if (score >= -100) {
+  } else if (score >= -99) {
     return "-SS";
   } else {
     return "-SSS";

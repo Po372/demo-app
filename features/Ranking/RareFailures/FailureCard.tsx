@@ -1,6 +1,6 @@
 "use client";
 
-import { scoreToRank } from "@/logics/scoreToRank";
+import { scoreToGrade } from "@/logics/scoreToRank";
 
 export default function FailureCard({
   order,
@@ -30,7 +30,7 @@ export default function FailureCard({
         </div>
       </div>
       <div className="mr-6 mt-4 flex flex-col items-end">
-        <div className="text-6xl font-bold text-slate-500 mb-2">{scoreToRank(score)}</div>
+        <div className="text-6xl font-bold text-slate-500 mb-2">{scoreToGrade(score)}</div>
         <div className="text-lg font-semibold text-slate-800">{score}点</div>
       </div>
       <div className="flex-1">
