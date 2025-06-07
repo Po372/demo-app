@@ -3,7 +3,7 @@
   border: 2px solid #333; /* 太めの枠線（四角） */
   padding: 8px 16px;
   cursor: pointer; /* ポインターカーソル */
-  background-color: rgb(10, 246, 132);
+  background-color: #d9f99d;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* 軽い影 */
   transition: all 0.1s ease-in-out; /* アニメーション */
   border-radius: 8px;
