@@ -1,0 +1,8 @@
+.ranking-button {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.5rem 1rem;
+  border: 1px solid white;
+  border-radius: 0.5rem;
+  color: white;
+}
