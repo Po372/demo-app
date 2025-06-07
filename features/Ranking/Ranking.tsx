@@ -28,7 +28,7 @@ export default function Ranking() {
           .limit(1);
 
         if (topError || bottomError) {
-          console.error("データの読み込みに失敗しました: ", topError , bottomError);
+          console.error("データの読み込みに失敗しました: ", topError, bottomError);
           return;
         }
         if (!topData || !bottomData || topData.length === 0 || bottomData.length === 0) {
@@ -69,7 +69,7 @@ export default function Ranking() {
         <div>ランキング</div>
       </div>
       {/* レア失敗ランキング */}
-      <div className="w-9/10 border-2 border-lime-600 rounded-2xl px-4 py-12 md:w-3/10">
+      <Link href="/ranking/rare-failures" className="w-9/10 border-2 border-lime-600 rounded-2xl px-4 py-12 md:w-3/10">
         <div className="text-center font-bold text-2xl">レア失敗ランキング</div>
         <div className="mt-12">1位</div>
         <div className="flex items-center justify-between">
@@ -77,9 +77,9 @@ export default function Ranking() {
           <div>SSS</div>
         </div>
         <div className="mt-12">{rankingResults?.top.failureText}</div>
-      </div>
+      </Link>
       {/* 普遍失敗ランキング */}
-      <div className="w-9/10 border-2 border-cyan-600 rounded-2xl px-4 py-12 md:w-3/10">
+      <Link href="/ranking/common-failures" className="w-9/10 border-2 border-cyan-600 rounded-2xl px-4 py-12 md:w-3/10">
         <div className="text-center font-bold text-2xl">普遍失敗ランキング</div>
         <div className="mt-12">1位</div>
         <div className="flex items-center justify-between">
@@ -87,7 +87,7 @@ export default function Ranking() {
           <div>SSS</div>
         </div>
         <div className="mt-12">{rankingResults?.bottom.failureText}</div>
-      </div>
+      </Link>
     </div>
   );
 }
