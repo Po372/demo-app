@@ -27,7 +27,7 @@ export default function HomeResultPage() {
   useEffect(() => {
     const fetchResultAndRanking = async () => {
       try {
-        // 対象ユーザーの結果を取得
+        // 自分の結果を取得
         const { data: result, error: resultError } = await supabase
           .from("results")
           .select("*")
@@ -40,10 +40,10 @@ export default function HomeResultPage() {
           return;
         }
 
-        // 全ユーザーのスコア取得（降順）
+        // 全ての結果をスコア降順で取得
         const { data: allResults, error: allError } = await supabase
           .from("results")
-          .select("id,  user_name, score, comment")
+          .select("id, user_name, score, comment")
           .order("score", { ascending: false });
 
         if (allError || !allResults) {
@@ -52,7 +52,7 @@ export default function HomeResultPage() {
           return;
         }
 
-        // 順位を付ける
+        // ランキング付け
         const ranked = allResults.map((entry, index) => ({
           id: entry.id,
           userName: entry.user_name,
@@ -61,19 +61,23 @@ export default function HomeResultPage() {
           rank: index + 1,
         }));
 
-        // 自分の順位を取得
-        const myEntry = ranked.find((r) => r.id === result.id);
-
-        if (!myEntry) {
-          console.error("自分のエントリが見つかりませんでした");
+        // 自分のインデックスを探す
+        const currentIndex = ranked.findIndex((r) => r.id === result.id);
+        if (currentIndex === -1) {
+          console.error("自分の順位が見つかりませんでした");
           setLoading(false);
           return;
         }
 
+        // 自分の前後1件ずつを取得(1位や最下位の時は上か下かの一件だけ取得)
+        const start = Math.max(currentIndex - 1, 0);
+        const end = Math.min(currentIndex + 2, ranked.length);
+        const surroundingEntries = ranked.slice(start, end);
+
         setResultData({
           grade: result.grade,
           score: result.score,
-          ranking: [myEntry], // 🔸 自分の順位だけを渡す
+          ranking: surroundingEntries,
         });
       } catch (err) {
         console.error("エラーが発生しました", err);
@@ -85,10 +89,25 @@ export default function HomeResultPage() {
     fetchResultAndRanking();
   }, [resultId]);
 
-  
+  //読込中画面（未実装）
   if (loading) return <div className="p-4 text-center">読み込み中...</div>;
   if (!resultData) return <div className="p-4 text-center">結果が見つかりませんでした。</div>;
   
+  //ランク判定
+  if(resultData.score>=100)resultData.grade="SSS";
+  else if(resultData.score>=95)resultData.grade="SS";
+  else if(resultData.score>=90)resultData.grade="S";
+  else if(resultData.score>=80)resultData.grade="A";
+  else if(resultData.score>=60)resultData.grade="B";
+  else if(resultData.score>=30)resultData.grade="C";
+  else if(resultData.score>=0)resultData.grade="D";
+  else if(resultData.score>=-29)resultData.grade="-D";
+  else if(resultData.score>=-59)resultData.grade="-C";
+  else if(resultData.score>=-79)resultData.grade="-B";
+  else if(resultData.score>=-89)resultData.grade="-A";
+  else if(resultData.score>=-94)resultData.grade="-S";
+  else if(resultData.score>=99)resultData.grade="-SS";
+  else resultData.grade="-SSS";
 
   return (
     <Result
@@ -98,6 +117,7 @@ export default function HomeResultPage() {
     />
   );
 }
+
 
 
 /*動く部分
