@@ -18,6 +18,12 @@ export default function Page() {
               failureText: "焼きそばを作ろうとしたが、麺が焦げてしまった。",
             })
           });
+
+          if (!response.ok) {
+            console.error("Error:", response.statusText);
+            return;
+          }
+
           console.log("Response from /api/score:", await response.json());
         }}
         className="px-4 py-2 bg-blue-500 text-white rounded"

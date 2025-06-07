@@ -1,3 +1,4 @@
+import { checkRateLimit } from "@/logics/rateLimiter";
 import { supabase } from "@/utils/supabase";
 import Anthropic from "@anthropic-ai/sdk";
 import { NextRequest, NextResponse } from "next/server";
@@ -23,6 +24,25 @@ function isValidAIResponse(obj: any): obj is AIResponse {
 
 export async function POST(request: NextRequest) {
   try {
+    // "x-forwarded-for" ヘッダーを使用してクライアントのIPアドレスを取得
+    const forwardedFor = request.headers.get("x-forwarded-for");
+    const rawIp = forwardedFor ? forwardedFor.split(",")[0].trim() : null;
+    const ip = rawIp ?? "IP not found";
+
+    // レート制限チェックの実行
+    const { success, limit, remaining } = await checkRateLimit(supabase, ip);
+
+    // 制限を超えている場合はエラーを返す
+    if (!success) {
+      return new NextResponse("Too Many Requests", {
+        status: 429,
+        headers: {
+          "X-RateLimit-Limit": limit.toString(),
+          "X-RateLimit-Remaining": remaining.toString(),
+        },
+      });
+    }
+
     // リクエストボディをJSONとして解析
     const { userName, failureText } = await request.json();
 
@@ -80,14 +100,17 @@ export async function POST(request: NextRequest) {
     }
 
     // データをSupabaseに挿入
-    const { data, error } = await supabase.from("results").insert([
-      {
-        user_name: userName === "" ? null : userName,
-        failure_text: failureText,
-        score: parsedResponse.score,
-        comment: parsedResponse.comment,
-      },
-    ]).select("id");
+    const { data, error } = await supabase
+      .from("results")
+      .insert([
+        {
+          user_name: userName === "" ? null : userName,
+          failure_text: failureText,
+          score: parsedResponse.score,
+          comment: parsedResponse.comment,
+        },
+      ])
+      .select("id");
 
     // Supabaseへの挿入に失敗した場合のエラーハンドリング
     if (error) {
