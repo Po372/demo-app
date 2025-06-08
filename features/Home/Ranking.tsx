@@ -11,7 +11,7 @@ function Ranking() {
   return (
     <div className="ranking-container">
       <Link href="/ranking" className="ranking-button">
-        <FaCrown style={{ color: "gold" }} />
+        <FaCrown className="ranking-icon" style={{ color: "gold" }} />
         <span>ランキング</span>
       </Link>
     </div>
