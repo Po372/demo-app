@@ -1,5 +1,5 @@
-import Home from "@/features/Home/Home";
+import HomeContainer from "@/features/Home/HomeContainer";
 
 export default function FirstPage() {
-  return <Home />;
+  return <HomeContainer />;
 }
