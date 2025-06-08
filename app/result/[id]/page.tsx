@@ -5,12 +5,14 @@ import { useParams } from "next/navigation";
 import { supabase } from "@/utils/supabase";
 import Result from "@/features/Result/Result";
 import Loading from "@/features/Result/Loading";
+import { scoreToGrade } from "@/logics/scoreToRank";
 
 type RankingEntry = {
   id: string;
   userName: string;
   score: number;
   comment: string;
+  summary: string;
   rank: number;
 };
 
@@ -23,6 +25,8 @@ export default function HomeResultPage() {
     grade: string;
     score: number;
     ranking: RankingEntry[];
+    comment: string;
+    failuer: string;
   } | null>(null);
 
   useEffect(() => {
@@ -44,7 +48,7 @@ export default function HomeResultPage() {
         // 全ての結果をスコア降順で取得
         const { data: allResults, error: allError } = await supabase
           .from("results")
-          .select("id, user_name, score, comment")
+          .select("id, user_name, score, comment, failure_text")
           .order("score", { ascending: false });
 
         if (allError || !allResults) {
@@ -59,6 +63,7 @@ export default function HomeResultPage() {
           userName: entry.user_name,
           score: entry.score,
           comment: entry.comment,
+          summary: entry.failure_text,
           rank: index + 1,
         }));
 
@@ -79,6 +84,8 @@ export default function HomeResultPage() {
           grade: result.grade,
           score: result.score,
           ranking: surroundingEntries,
+          comment: result.comment,
+          failuer: result.failure_text,
         });
       } catch (err) {
         console.error("エラーが発生しました", err);
@@ -90,28 +97,15 @@ export default function HomeResultPage() {
     fetchResultAndRanking();
   }, [resultId]);
 
-  //読込中画面（未実装）
+  //読込中画面
   if (loading) return (
       //<div className="p-4 text-center">読み込み中...</div>
       <Loading />
     );
   if (!resultData) return <div className="p-4 text-center">結果が見つかりませんでした。</div>;
   
-  //ランク判定
-  if(resultData.score>=100)resultData.grade="SSS";
-  else if(resultData.score>=95)resultData.grade="SS";
-  else if(resultData.score>=90)resultData.grade="S";
-  else if(resultData.score>=80)resultData.grade="A";
-  else if(resultData.score>=60)resultData.grade="B";
-  else if(resultData.score>=30)resultData.grade="C";
-  else if(resultData.score>=0)resultData.grade="D";
-  else if(resultData.score>=-29)resultData.grade="-D";
-  else if(resultData.score>=-59)resultData.grade="-C";
-  else if(resultData.score>=-79)resultData.grade="-B";
-  else if(resultData.score>=-89)resultData.grade="-A";
-  else if(resultData.score>=-94)resultData.grade="-S";
-  else if(resultData.score>=99)resultData.grade="-SS";
-  else resultData.grade="-SSS";
+
+  resultData.grade=scoreToGrade(resultData.score);
 
   return (
     
@@ -119,6 +113,8 @@ export default function HomeResultPage() {
       grade={resultData.grade}
       score={resultData.score}
       ranking={resultData.ranking}
+      comment={resultData.comment}
+      failue_text={resultData.failuer}
     />
     
   );
