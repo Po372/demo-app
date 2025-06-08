@@ -180,7 +180,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     // AIの出力したJSONの構文が不正な場合
     if (error instanceof SyntaxError) {
-      console.error("AI応答のJSONパースエラー: ", error, "リクエストボディ:", request.body);
+      console.error("\n\nAI応答のJSONパースエラー: ", error, "\n\nリクエストボディ:", request.body);
       return new NextResponse(JSON.stringify({ error: "AIからの応答データ形式に問題があります。" }), {
         status: 500,
       });
