@@ -38,9 +38,9 @@ export default function HomeContainer() {
 
       // HTTPレスポンスのチェック
       if (!response.ok) {
-        const errorText = await response.json();
-        console.error("通信エラー: ", errorText);
-        setError("通信エラー: " + errorText.message);
+        const responseContent = await response.json();
+        console.error("通信エラー: ", responseContent);
+        setError("通信エラー: " + responseContent.error);
         setLoading(false);
         return;
       }

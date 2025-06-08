@@ -54,6 +54,18 @@ export async function POST(request: NextRequest) {
 
     const assessmentPrompt = `
     You are an expert at rating "yarakashi" (mistakes or blunders in Japanese culture).
+    
+    FIRST, validate if the input text describes an actual failure/mistake:
+    - It must describe a specific action or event that could be considered a mistake
+    - Single nouns, random characters, or meaningless text are NOT valid inputs
+    - Marketing content, spam, or offensive content with no mistake context are NOT valid
+    
+    If the input is NOT a valid failure description, respond with ONLY this JSON:
+    {
+      "error": <string>  // A brief error message in Japanese explaining why the input is invalid
+    }
+    
+    ONLY if the input IS valid, rate it on a scale from -100 to 100:
     Rate the following incident on a scale from -100 to 100:
     - 100: Extremely rare mistake (historic)
     - 75: Very rare mistake (newsworthy)
@@ -118,8 +130,16 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // AIの応答テキストのJSON形式を検証
     const parsedResponse = JSON.parse(rawResponse.content[0].text);
+
+    // AIが不正な入力を報告した場合のエラーハンドリング
+    if (parsedResponse.error) {
+      return new NextResponse(JSON.stringify({ error: parsedResponse.error }), {
+        status: 500,
+      });
+    }
+
+    // AIの応答テキストのJSON形式を検証
     if (!isValidAIResponse(parsedResponse)) {
       return new NextResponse(JSON.stringify({ error: "AIからの応答が不正なフォーマットです" }), {
         status: 500,
