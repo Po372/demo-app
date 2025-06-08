@@ -39,7 +39,7 @@ export const Result: React.FC<ResultProps> = ({ grade, score, ranking }) => {
                 やらかし度：<span className="font-semibold text-4xl">{score}点</span>
             </p>
                 {/*自分周辺のランキング表示*/ }
-                <div className="bg-lime-200 rounded-md mt-6 py-2 px-4 space-y-1 text-left text-black text-sm font-bold">
+                <div className="bg-lime-200 rounded-md mt-6 py-2 px-4 space-y-1 text-left text-black text-m font-bold">
                 {ranking.map((entry) => (
                     <div key={entry.id}>
                       <span className="min-w-[60px] font-mono">
