@@ -10,15 +10,19 @@ interface AIResponse {
 }
 
 // AI応答の型ガード関数
-function isValidAIResponse(obj: any): obj is AIResponse {
+function isValidAIResponse(obj: unknown): obj is AIResponse {
+  if (!obj || typeof obj !== "object" || obj === null) {
+    return false;
+  }
+  
+  const candidate = obj as Record<string, unknown>;
+  
   return (
-    obj &&
-    typeof obj === "object" &&
-    typeof obj.score === "number" &&
-    obj.score >= -100 &&
-    obj.score <= 100 &&
-    typeof obj.comment === "string" &&
-    obj.comment.length > 0
+    typeof candidate.score === "number" &&
+    candidate.score >= -100 &&
+    candidate.score <= 100 &&
+    typeof candidate.comment === "string" &&
+    candidate.comment.length > 0
   );
 }
 
