@@ -14,9 +14,9 @@ function isValidAIResponse(obj: unknown): obj is AIResponse {
   if (!obj || typeof obj !== "object" || obj === null) {
     return false;
   }
-  
+
   const candidate = obj as Record<string, unknown>;
-  
+
   return (
     typeof candidate.score === "number" &&
     candidate.score >= -100 &&
@@ -53,16 +53,39 @@ export async function POST(request: NextRequest) {
     const anthropic = new Anthropic();
 
     const assessmentPrompt = `
-    Score the following failure text based on its speciality or universality.
-
-      Failure Text:
-      <failureText>${failureText}</failureText>
+    You are an expert at rating "yarakashi" (mistakes or blunders in Japanese culture).
+    Rate the following incident on a scale from -100 to 100:
+    - 100: Extremely rare mistake (historic)
+    - 75: Very rare mistake (newsworthy)
+    - 50: Rare mistake (uncommon but happens)
+    - 25: Somewhat unusual mistake
+    - 0: Average mistake
+    - -25: Somewhat common mistake
+    - -50: Common mistake (many experience)
+    - -75: Very common mistake (most experience)
+    - -100: Universal mistake (nearly everyone experiences)
+    
+    Consider:
+    1. Frequency
+    2. Percentage of people who experience it
+    3. Uniqueness of circumstances
+    4. Social recognition
+    
+    Examples:
+    - 「スーパーでお釣りをもらい忘れた」→約-80 (very common)
+    - 「会議中に寝落ちした」→約-50 (common)
+    - 「重要な会議の日付を1日間違えた」→約0 (average)
+    - 「会社のサーバーを誤って全削除した」→約50 (rare)
+    - 「国際放送で生放送中に不適切な発言をした」→約80 (very rare)
+  
+    Failure Text:
+    <failureText>${failureText}</failureText>
 
     Respond with ONLY a JSON object, using the format below:
-      <format>
+    <format>
     {
       "score": <number>, // A score between -100 and 100 in decimal, where 100 is the most rare and special, and -100 is the most common and universal.
-        "comment": <string> // A brief and humorous comment IN JAPANESE about the speciality or universality of the text. (length: about 20 catracters)
+      "comment": <string> // A brief and humorous comment IN JAPANESE about the speciality or universality of the text. (length: about 20 catracters)
     }
     </format>
     `;
