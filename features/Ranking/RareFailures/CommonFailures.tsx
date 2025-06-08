@@ -74,14 +74,23 @@ export default function CommonFailures() {
       {rankingResults.length > 0 ? (
         <div className="grid grid-cols-1 gap-4 mt-16 lg:grid-cols-2 lg:gap-12">
           {rankingResults.map((result, index) => (
-            <FailureCard
-              order={index + 1}
-              score={result.score}
-              userName={result.userName}
-              comment={result.comment}
-              failureText={result.failureText}
-              createdAt={result.createdAt}
-            />
+            <div
+              key={`${result.userName}-${result.createdAt}`}
+              className="animate-fade-in opacity-0"
+              style={{
+                animationDelay: `${index * 200}ms`,
+                animationFillMode: "forwards",
+              }}
+            >
+              <FailureCard
+                order={index + 1}
+                score={result.score}
+                userName={result.userName}
+                comment={result.comment}
+                failureText={result.failureText}
+                createdAt={result.createdAt}
+              />
+            </div>
           ))}
         </div>
       ) : (
