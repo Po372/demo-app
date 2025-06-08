@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { supabase } from "@/utils/supabase";
 import Result from "@/features/Result/Result";
+import Loading from "@/features/Result/Loading";
 
 type RankingEntry = {
   id: string;
@@ -90,7 +91,10 @@ export default function HomeResultPage() {
   }, [resultId]);
 
   //読込中画面（未実装）
-  if (loading) return <div className="p-4 text-center">読み込み中...</div>;
+  if (loading) return (
+      //<div className="p-4 text-center">読み込み中...</div>
+      <Loading />
+    );
   if (!resultData) return <div className="p-4 text-center">結果が見つかりませんでした。</div>;
   
   //ランク判定
@@ -110,11 +114,13 @@ export default function HomeResultPage() {
   else resultData.grade="-SSS";
 
   return (
+    
     <Result
       grade={resultData.grade}
       score={resultData.score}
       ranking={resultData.ranking}
     />
+    
   );
 }
 
