@@ -120,8 +120,6 @@ export default function HomeResultPage() {
   );
 }
 
-
-
 /*過去の遺物
 const testRanking = [
   { id: '1', userId: 1, userName: 'ゆかぽ',comment: 'なし', score: 97, rank: 172 },
