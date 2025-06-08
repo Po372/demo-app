@@ -141,7 +141,8 @@ export async function POST(request: NextRequest) {
 
     // AIの応答テキストのJSON形式を検証
     if (!isValidAIResponse(parsedResponse)) {
-      return new NextResponse(JSON.stringify({ error: "AIからの応答が不正なフォーマットです" }), {
+      console.error("AIからの応答が不正なフォーマットです", parsedResponse);
+      return new NextResponse(JSON.stringify({ error: "AIの応答形式に問題が発生しました。しばらくしてから再度お試しください。" }), {
         status: 500,
       });
     }
@@ -161,7 +162,13 @@ export async function POST(request: NextRequest) {
 
     // Supabaseへの挿入に失敗した場合のエラーハンドリング
     if (error) {
-      return new NextResponse(JSON.stringify({ error: error.message }), {
+      console.error("Supabaseへの挿入エラー: ", error?.message, "詳細:", error, "入力値:", {
+        userName,
+        failureText,
+        score: parsedResponse.score,
+        comment: parsedResponse.comment,
+      });
+      return new NextResponse(JSON.stringify({ error: "データの保存中に問題が発生しました。しばらく時間をおいて再度お試しください。" }), {
         status: 500,
       });
     }
@@ -171,17 +178,21 @@ export async function POST(request: NextRequest) {
 
     return new NextResponse(JSON.stringify({ resultId: id }), { status: 200 });
   } catch (error) {
-    console.error("Error processing request:", error);
-
     // AIの出力したJSONの構文が不正な場合
     if (error instanceof SyntaxError) {
-      return new NextResponse(JSON.stringify({ error: "Invalid JSON format" }), {
+      console.error("AI応答のJSONパースエラー: ", error, "リクエストボディ:", request.body);
+      return new NextResponse(JSON.stringify({ error: "AIからの応答データ形式に問題があります。" }), {
         status: 500,
       });
     }
 
     // その他のエラー
-    return new NextResponse(JSON.stringify({ error: "Internal Server Error" }), {
+    console.error("サーバー内部エラー: ", error, "リクエスト情報:", {
+      headers: Object.fromEntries(request.headers.entries()),
+      method: request.method,
+      url: request.url,
+    });
+    return new NextResponse(JSON.stringify({ error: "サーバー内部で予期しないエラーが発生しました。時間をおいて再度お試しください。" }), {
       status: 500,
     });
   }
