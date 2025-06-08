@@ -6,7 +6,7 @@ function Headline() {
       className="headline"
       style={{
         display: "inline-block",
-        padding: "0.25rem 0.5rem",
+        padding: "1.25rem 1.5rem",
         border: "2px solid #d9f99d",
         borderRadius: "0.5rem",
       }}
