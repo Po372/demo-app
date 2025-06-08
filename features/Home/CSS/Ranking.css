@@ -1,0 +1,29 @@
+.ranking-container {
+  align-self: flex-end; /* 親の中で右寄せ */
+} /*特定の要素の中で右寄せするプロパティ*/
+
+.ranking-button {
+  display: inline-flex;
+  justify-content: flex-end;
+  padding: 0.5rem 1rem;
+  border: 1px solid #dcdcdc;
+  border-radius: 1rem;
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.ranking-button:active {
+  transform: translateY(2px); /* 下に2px沈む */
+  background-color: #55bb55; /* 少し色も変えて効果を強調 */
+}
+
+@media (max-width: 600px) {
+  ranking-container {
+    align-self: center;
+    margin-top: 2rem;
+  }
+
+  .ranking-button {
+    font-size: 0.875rem;
+    padding: 0.4rem 0.8rem;
+  }
+}

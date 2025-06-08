@@ -1,0 +1,15 @@
+.text-input {
+  background-color: white;
+  color: black; /* 入力されるテキストの色が黒になる */
+  padding: 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 1rem;
+  height: 250px;
+}
+
+@media (max-width: 600px) {
+  .text-input {
+    height: 150px;
+    font-size: 0.875rem;
+  }
+}

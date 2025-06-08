@@ -1,0 +1,27 @@
+/* Scoring.css */
+.scoring {
+  border: 2px solid #333; /* 太めの枠線（四角） */
+  padding: 8px 16px;
+  cursor: pointer; /* ポインターカーソル */
+  background-color: #d9f99d;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* 軽い影 */
+  transition: all 0.1s ease-in-out; /* アニメーション */
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+.scoring:active {
+  transform: translateY(2px); /* 下に沈む */
+  box-shadow: none; /* 影を消す */
+  background-color: #b2f2b2; /* 少し濃い緑に変化 */
+}
+/* スコアリングボタンのホバー効果 */
+
+@media (max-width: 600px) {
+  .scoring {
+    padding: 6px 12px;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+  }
+}

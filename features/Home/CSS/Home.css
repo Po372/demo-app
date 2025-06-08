@@ -1,0 +1,29 @@
+html,
+body {
+  height: 100%;
+  margin: 0; /* デフォルトの余白を消す（重要） */
+  padding: 0;
+}
+/* 全体の高さを100%に設定 */
+
+.home-container {
+  min-height: 100vh; /* ビューポートの高さに合わせる */
+  display: flex;
+  flex-direction: column; /*縦に並べる*/
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem;
+  background-color: #0891b2;
+}
+/*マインヘイトっていうのは最少の高さを規定する*/
+
+@media (max-width: 600px) {
+  .home-container {
+    padding: 2rem 1rem;
+    gap: 2rem;
+    justify-content: space-around;
+    gap: 1rem;
+  }
+}
+/*レスポンシブデザイン*/
+/* 画面幅が600px以下のときのスタイル */
