@@ -4,3 +4,12 @@
   color: white;
   /*外側の線についての編集はスパンタグで書きました*/
 }
+
+@media (max-width: 600px) {
+  .headline {
+    font-size: 1.5rem;
+    /* スマホでは小さくする */
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+}

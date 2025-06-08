@@ -3,13 +3,13 @@ import TextInput from "./Textinput";
 import Ranking from "./Ranking";
 import Headline from "./Headline";
 import Scoring from "./Scoring";
+import HeadlineInput from "./HeadlineInput";
 
 export default function Home() {
   return (
     <div className="home-container">
       <Ranking />
-      <Headline />
-      <TextInput />
+      <HeadlineInput />
       <Scoring />
     </div>
   );

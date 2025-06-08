@@ -16,3 +16,12 @@
   background-color: #b2f2b2; /* 少し濃い緑に変化 */
 }
 /* スコアリングボタンのホバー効果 */
+
+@media (max-width: 600px) {
+  .scoring {
+    padding: 6px 12px;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+  }
+}
