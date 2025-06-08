@@ -60,7 +60,7 @@ export default function HomeResultPage() {
         // ランキング付け
         const ranked = allResults.map((entry, index) => ({
           id: entry.id,
-          userName: entry.user_name,
+          userName: entry.user_name ?? "匿名",
           score: entry.score,
           comment: entry.comment,
           summary: entry.failure_text,
